@@ -18,8 +18,18 @@ const connectionFunctions = {
             resolve("Connection closed.");
         });
     },
-    getAll: () => {
-        return new Promise((resolve, reject) => {});
+    getAll: (table) => {
+        return new Promise((resolve, reject) => {
+            if (connection) {
+                let queryLine = `SELECT * FROM ${mysql.escapeId(table)}`;
+                connection.query(queryLine, (err, result) => {
+                    err ? reject(err) : resolve(result);
+                });
+            }
+            else {
+                reject(new Error("Connection failed."));
+            }
+        });
     },
     search: () => {
         return new Promise((resolve, reject) => {});
