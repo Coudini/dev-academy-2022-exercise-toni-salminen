@@ -36,8 +36,6 @@ const validation = {
     }
 }
 
-console.log("test")
-
 module.exports = validation;
 
 /*
