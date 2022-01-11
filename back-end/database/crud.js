@@ -35,5 +35,12 @@ const connectionFunctions = {
         return new Promise((resolve, reject) => {});
     }
 };
-
+async function test(){
+    await connectionFunctions.connect()
+    console.log(connection);
+    x = await connectionFunctions.getAll("farmdata");
+    console.log(x);
+    connectionFunctions.close();
+}
+test();
 module.exports = connectionFunctions;
