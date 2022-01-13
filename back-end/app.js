@@ -19,9 +19,8 @@ const getConnection = app.listen(port, async () => {
 
         console.log(`Listening to port ${getConnection.address().port}`);
         
-        app.use('/farmdata', apiRouter);
-        //const x = await database.getAll('farmdata');
-        //console.log(x);
+        app.use('/api', apiRouter);
+        
     } catch (err) {
         console.log(err)
         getConnection.close();

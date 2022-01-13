@@ -23,7 +23,7 @@ const connectionFunctions = {
     getAll: (table) => {
         return new Promise((resolve, reject) => {
             if (connection) {
-                let queryLine = `SELECT * FROM ${mysql.escapeId(table)}`;
+                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} ORDER BY farmname ASC, datevalue DESC`;
                 connection.query(queryLine, (err, result) => {
                     err ? reject(err) : resolve(result);
                 });
@@ -33,11 +33,12 @@ const connectionFunctions = {
             }
         });
     },
-    // column: farmame
+
+    // Used for listing all farm names
     getDistinct: (table, column) => {
         return new Promise((resolve, reject) => {
             if (connection) {
-                let queryLine = `SELECT DISTINCT ${column} FROM ${mysql.escapeId(table)}`;
+                let queryLine = `SELECT DISTINCT ${column} FROM ${mysql.escapeId(table)} ORDER BY ${column} ASC`;
                 connection.query(queryLine, (err,result) => {
                     err ? reject(err) : resolve(result);
                 })
@@ -47,10 +48,14 @@ const connectionFunctions = {
             }
         })
     },
+
+    // Used for listing by farm name ordered by dates
     search: (table,column, argument) => {
         return new Promise((resolve, reject) => {
+            console.log(table,column,argument)
             if (connection) {
-                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}'`;
+                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}'ORDER BY datevalue ASC`;
+                console.log("queryLine:",queryLine);
                 connection.query(queryLine, (err, result) => {
                     err ? reject(err) : resolve(result);
                 })
@@ -60,6 +65,7 @@ const connectionFunctions = {
             }
         });
     },
+
     saveData: (table, data) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -75,6 +81,7 @@ const connectionFunctions = {
             else {reject(new Error("Connection failed."))}
         })
     },
+
     deleteAll: (table) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -86,6 +93,7 @@ const connectionFunctions = {
             else {reject(new Error("Connection failed."))}
         })
     },
+
     deleteById: (table, id) => {
         return new Promise((resolve, reject) => {
             if (connection) {

@@ -4,21 +4,41 @@ import Button from '@mui/material/Button';
 import React, {useState, useEffect} from 'react';
 import BackendConnection from './BackendConnection'
 
+import { useParams } from "react-router-dom";
+
 const App = () => {
+  const [testData, setTestData] = useState("test");
 
-  const [testData, setTestData] = useState("");
-
-  const testi = async () => {
+  const getAll = async () => {
     const x = await BackendConnection.getAll();
-    setTestData(String(x[0].farmname));
+    console.log(x);
+    //setTestData(String(x[0].farmname));
+  }
+  const getDistinct = async () => {
+    const x = await BackendConnection.getDistinct();
+    console.log(x);
+  }
+  const search = async () => {
+    const x = await BackendConnection.search('test');
+    console.log('x:',x);
   }
 
   return (
     <div className="App">
       <Button 
         variant="contained"
-        onClick={()=>testi()}>
-          Hello World
+        onClick={()=>getAll()}>
+          getAll
+      </Button>
+      <Button 
+        variant="contained"
+        onClick={()=>getDistinct()}>
+          getDistinct
+      </Button>
+      <Button 
+        variant="contained"
+        onClick={()=>search()}>
+          search
       </Button>
       <p>test</p>
       <div>
