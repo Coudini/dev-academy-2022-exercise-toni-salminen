@@ -6,16 +6,24 @@ import BackendConnection from './BackendConnection'
 
 const App = () => {
 
-  const [testData, setTestData] = useState(null);
+  const [testData, setTestData] = useState("");
+
+  const testi = async () => {
+    const x = await BackendConnection.getAll();
+    setTestData(String(x[0].farmname));
+  }
 
   return (
     <div className="App">
       <Button 
         variant="contained"
-        onClick={()=>console.log("klikattu")}>
+        onClick={()=>testi()}>
           Hello World
       </Button>
-      <p>testData:{testData}</p>
+      <p>test</p>
+      <div>
+        {testData}
+      </div>
     </div>
   );
 }
