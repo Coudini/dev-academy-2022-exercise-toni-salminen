@@ -8,8 +8,10 @@ import DropdownList from './DropdownList';
 const App = () => {
 
   const [farmData, setFarmData] = useState([]);
-  const [testData, setTestData] = useState("test");
+  const [selectedFarm, setSelectedFarm] = useState('All');
+  const [selectedMetric, setSelectedMetric] = useState('All');
 
+  /*
   const getAll = async () => {
     const x = await BackendConnection.getAll();
     console.log(x);
@@ -22,15 +24,30 @@ const App = () => {
     const x = await BackendConnection.search('test');
     console.log('x:',x);
   }
+  */
+
+  function farmSelect(e){
+    setSelectedFarm(e);
+  }
+  function metricSelect(e){
+    setSelectedMetric(e);
+  }
 
   return (
     <div className="App">
       <div className="topBar">
-{/*
-        <DropdownList>
-          farms={['1','2','3']}
-        </DropdownList>
- */}
+        <DropdownList
+          data={['All','1','2','3']}
+          label={'Farm'}
+          helper={'Select Farm'}
+          parentFunction={farmSelect}/>
+        <DropdownList
+          data={['All','1','2','3']}
+          label={'Metric'}
+          helper={'Select Metric'}
+          parentFunction={metricSelect}/>
+        
+
       </div>
       <div className="container">
         <div className="table">
