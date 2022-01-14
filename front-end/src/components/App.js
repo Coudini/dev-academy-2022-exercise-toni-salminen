@@ -2,9 +2,8 @@ import logo from '../logo.svg';
 import './styles/App.css';
 import Button from '@mui/material/Button';
 import React, {useState, useEffect} from 'react';
-import BackendConnection from './BackendConnection'
-
-import { useParams } from "react-router-dom";
+import BackendConnection from './BackendConnection';
+import DropdownList from './DropdownList';
 
 const App = () => {
 
@@ -14,7 +13,6 @@ const App = () => {
   const getAll = async () => {
     const x = await BackendConnection.getAll();
     console.log(x);
-    //setTestData(String(x[0].farmname));
   }
   const getDistinct = async () => {
     const x = await BackendConnection.getDistinct();
@@ -27,6 +25,23 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="topBar">
+{/*
+        <DropdownList>
+          farms={['1','2','3']}
+        </DropdownList>
+ */}
+      </div>
+      <div className="container">
+        <div className="table">
+          table
+        </div>
+        <div className="graph">
+          graph
+        </div>
+      </div>
+
+      {/* 
       <Button 
         variant="contained"
         onClick={()=>getAll()}>
@@ -42,10 +57,8 @@ const App = () => {
         onClick={()=>search()}>
           search
       </Button>
-      <p>test</p>
-      <div>
-        {testData}
-      </div>
+      */}
+      
     </div>
   );
 }
