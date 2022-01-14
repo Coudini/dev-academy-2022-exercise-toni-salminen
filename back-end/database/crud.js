@@ -85,7 +85,7 @@ const connectionFunctions = {
     deleteAll: (table) => {
         return new Promise((resolve, reject) => {
             if (connection) {
-                let queryLine =  `DELETE * FROM ${table}`;
+                let queryLine =  `DELETE FROM ${table}`;
                 connection.query(queryLine, (err, result) => {
                     err ? reject(err) : resolve(result);
                 })
@@ -105,22 +105,17 @@ const connectionFunctions = {
             else {reject(new Error("Connection failed."))}
         })
     },
-    init: (table, data) => {
+    insert: (table, columns, data) => {
         return new Promise((resolve, reject) => {
             if (connection) {
-                //await this.deleteAll(table);
-                //data.forEach
+                let queryLine = `INSERT INTO ${table} (${columns[0]},${columns[1]},${columns[2]},${columns[3]}) VALUES ('${data[0]}','${data[1]}','${data[2]}',${data[3]});`;
+                connection.query(queryLine, (err, result) => {
+                    err ? reject(err) : resolve(result);
+                })
             }
             else {reject(new Error("Connection failed."))}
         })
     }
 };
-async function test(){
-    await connectionFunctions.connect()
-    console.log(connection);
-    x = await connectionFunctions.getAll("farmdata");
-    console.log(x);
-    //connectionFunctions.close();
-}
-//test();
+
 module.exports = connectionFunctions;

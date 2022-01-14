@@ -7,6 +7,8 @@ import BackendConnection from './BackendConnection'
 import { useParams } from "react-router-dom";
 
 const App = () => {
+
+  const [farmData, setFarmData] = useState([]);
   const [testData, setTestData] = useState("test");
 
   const getAll = async () => {

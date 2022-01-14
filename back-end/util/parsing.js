@@ -26,12 +26,12 @@ function readFileAsync (file) {
 }
 
 async function filesToArray (directory, files) {
-    let csvData = {}
+    let csvData = [];
     for (let i = 0; i < files.length; i++) {
         let data = await readFileAsync(`${directory}${files[i]}`);
         const headers = data.slice(0, data.indexOf("\n")).split(",");
         const rows = data.slice(data.indexOf("\n") + 1).split("\n");
-        let farmData = []
+        //let farmData = []
         for (let j = 0; j < rows.length; j++) {
             const values = rows[j].split(",");
             if (values.length == headers.length) {
@@ -42,11 +42,12 @@ async function filesToArray (directory, files) {
                     value: parseFloat(values[3])
                 });
                 if (validator.dataValidation(dataModel).errors.length == 0){
-                    farmData.push(dataModel);
+                    csvData.push(dataModel);
+                    //farmData.push(dataModel);
                 }
             }
         }
-        csvData[files[i]] = farmData;
+        //csvData[files[i]] = farmData;
     }
     return csvData;
 }
