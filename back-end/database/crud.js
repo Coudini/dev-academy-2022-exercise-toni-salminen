@@ -50,7 +50,7 @@ const connectionFunctions = {
     },
 
     // Used for listing by farm name ordered by dates
-    search: (table,column, argument) => {
+    searchFarm: (table,column, argument) => {
         return new Promise((resolve, reject) => {
             console.log(table,column,argument)
             if (connection) {
@@ -65,6 +65,35 @@ const connectionFunctions = {
             }
         });
     },
+
+    searchMetric: (table,column, argument) => {
+        return new Promise((resolve, reject) => {
+            console.log(table,column,argument)
+            if (connection) {
+                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}' ORDER BY datevalue ASC`;
+                console.log("queryLine:",queryLine);
+                connection.query(queryLine, (err, result) => {
+                    err ? reject(err) : resolve(result);
+                })
+            }
+            else{
+                reject(new Error("Connection failed."));
+            }
+        });
+    },
+    
+    searchFarmMetric: (table,farmColumn,metricColumn,metricArgument,farmArgument) => {
+        return new Promise((resolve, reject) => {
+            if (connection) {
+                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${farmColumn} = '${farmArgument}' AND ${metricColumn} = '${metricArgument}'`;
+                connection.query(queryLine, (err, result) => {
+                    err ? reject(err) : resolve(result);
+                })
+            }
+
+        });
+    },
+
 
     saveData: (table, data) => {
         return new Promise((resolve, reject) => {

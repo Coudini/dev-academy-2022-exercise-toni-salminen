@@ -24,9 +24,23 @@ router.get('/distinct', async (req, res) => {
     }
 })
 
-//get by farm
-router.get('/search', async (req, res) => {
-    const results = await connection.search('farmdata','farmname',req.query.farmname)
+//get by farmname
+router.get('/searchfarm', async (req, res) => {
+    const results = await connection.searchFarm('farmdata','farmname',req.query.farmname)
+    res.status(200).send(results);
+})
+
+// get by metrictype
+router.get('/searchmetric', async (req, res) => {
+    console.log(req);
+    const results = await connection.searchMetric('farmdata','metrictype',req.query.metrictype)
+    res.status(200).send(results);
+})
+
+// get by metrictype and farmname
+router.get('/searchfarmmetric', async (req, res) => {
+    console.log(req);
+    const results = await connection.searchFarmMetric('farmdata','farmname','metrictype',req.query.metrictype,req.query.farmname)
     res.status(200).send(results);
 })
 

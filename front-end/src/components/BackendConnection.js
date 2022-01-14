@@ -14,17 +14,17 @@ const getDistinct = async (column) => {
 }
 
 const searchFarm = async (farmname) => {
-    const result = await axios.get(`${baseUrl}search?farmname=${farmname}`);
+    const result = await axios.get(`${baseUrl}searchfarm?farmname=${farmname}`);
     return result.data;
 }
 
-const searchMetric = async (metric) => {
-    const result = await axios.get();
+const searchMetric = async (metrictype) => {
+    const result = await axios.get(`${baseUrl}searchmetric?metrictype=${metrictype}`);
     return result.data;
 }
 
-const searchMetricFarm = async (farm, metric) => {
-    const result = await axios.get();
+const searchMetricFarm = async (metrictype, farmname) => {
+    const result = await axios.get(`${baseUrl}searchfarmmetric?farmname=${farmname}&metrictype=${metrictype}`);
     return result.data;
 }
 

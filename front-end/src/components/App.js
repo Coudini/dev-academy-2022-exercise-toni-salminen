@@ -41,9 +41,9 @@ const App = () => {
   }
 
   //by farm
-  const getFarm = async (e) => {
-    const dbFarmData = await BackendConnection.searchFarm(e);
-    console.log('search:',dbFarmData);
+  const getFarm = async (farm) => {
+    const dbFarmData = await BackendConnection.searchFarm(farm);
+    console.log('searchfarm:',farm,dbFarmData);
     let farmDataArray = [];
     for (let i = 0; i < dbFarmData.length; i++) {
       await farmDataArray.push(dbFarmData[i]);
@@ -51,12 +51,26 @@ const App = () => {
     setFarmData(farmDataArray);
   }
 
-  const getMetric = async (e) => {
-
+  // by metric (crud.js search())
+  const getMetric = async (metric) => {
+    const dbFarmData = await BackendConnection.searchMetric(metric);
+    console.log('searchmetric:',metric, dbFarmData);
+    let farmDataArray = [];
+    for (let i = 0; i < dbFarmData.length; i++) {
+      await farmDataArray.push(dbFarmData[i]);
+    }
+    setFarmData(farmDataArray);
   }
 
-  const getFarmMetric = async (e) => {
-    
+  // by farm and metric (make new to crud.js)
+  const getFarmMetric = async (farm, metric) => {
+    const dbFarmData = await BackendConnection.searchMetricFarm(metric,farm);
+    console.log('searchfarmmetric:',metric,farm, dbFarmData);
+    let farmDataArray = [];
+    for (let i = 0; i < dbFarmData.length; i++) {
+      await farmDataArray.push(dbFarmData[i]);
+    }
+    setFarmData(farmDataArray);
   }
   
 
@@ -65,28 +79,37 @@ const App = () => {
 
   function farmSelect(e){
     setSelectedFarm(e);
+    let sqlName = (e).replace(/'/g, "''");
     if (e=='All'){
       if (selectedMetric == 'All') {
         getAll();
       } else {
-        //search by all farms with metric
+        getMetric(selectedMetric);
       }
     } else {
       if (selectedMetric == 'All') {
-        let sqlName = (e).replace(/'/g, "''");
-        //search all metrics with farm
         getFarm(sqlName);
       } else {
-        //search by metric and name
+        getFarmMetric(sqlName, selectedMetric);
       }
     }
   }
 
-
   function metricSelect(e){
     setSelectedMetric(e);
+    let sqlName = (selectedFarm).replace(/'/g, "''");
     if (e=='All') {
-
+      if (selectedFarm == 'All') {
+        getAll();
+      } else {
+        getFarm(sqlName);
+      }
+    } else {
+      if (selectedFarm == 'All') {
+        getMetric(e);
+      } else {
+        getFarmMetric(sqlName, e);
+      }
     }
   }
 
