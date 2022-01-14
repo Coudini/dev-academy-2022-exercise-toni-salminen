@@ -38,7 +38,6 @@ const connectionFunctions = {
     getDistinct: (table, column) => {
         return new Promise((resolve, reject) => {
             if (connection) {
-                console.log(column)
                 let queryLine = `SELECT DISTINCT ${column} FROM ${mysql.escapeId(table)} ORDER BY ${column} ASC`;
                 connection.query(queryLine, (err,result) => {
                     err ? reject(err) : resolve(result);
@@ -55,7 +54,7 @@ const connectionFunctions = {
         return new Promise((resolve, reject) => {
             console.log(table,column,argument)
             if (connection) {
-                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}'ORDER BY datevalue ASC`;
+                let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}' ORDER BY datevalue ASC`;
                 console.log("queryLine:",queryLine);
                 connection.query(queryLine, (err, result) => {
                     err ? reject(err) : resolve(result);

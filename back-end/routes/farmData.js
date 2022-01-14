@@ -18,7 +18,6 @@ router.get('/farmdata', async (req, res) => {
 router.get('/distinct', async (req, res) => {
     try {
         const results = await connection.getDistinct('farmdata',req.query.column);
-        console.log(req)
         res.status(200).send(results);
     } catch (err) {
         res.status(400).send(err);
@@ -26,7 +25,6 @@ router.get('/distinct', async (req, res) => {
 })
 
 //get by farm
-//req.body.name
 router.get('/search', async (req, res) => {
     const results = await connection.search('farmdata','farmname',req.query.farmname)
     res.status(200).send(results);

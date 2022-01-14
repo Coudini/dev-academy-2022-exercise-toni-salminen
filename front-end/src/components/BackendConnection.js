@@ -13,17 +13,27 @@ const getDistinct = async (column) => {
     return result.data;
 }
 
-const search = async (farmname) => {
-    const result = await  axios.get(`${baseUrl}search?farmname=${farmname}`);
+const searchFarm = async (farmname) => {
+    const result = await axios.get(`${baseUrl}search?farmname=${farmname}`);
     return result.data;
 }
 
+const searchMetric = async (metric) => {
+    const result = await axios.get();
+    return result.data;
+}
 
+const searchMetricFarm = async (farm, metric) => {
+    const result = await axios.get();
+    return result.data;
+}
 
 const obj = {
     getAll,
     getDistinct,
-    search
+    searchFarm,
+    searchMetric,
+    searchMetricFarm
 };
 
 export default obj;
