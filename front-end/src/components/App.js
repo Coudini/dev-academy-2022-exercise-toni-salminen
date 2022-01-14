@@ -11,20 +11,27 @@ const App = () => {
   const [selectedFarm, setSelectedFarm] = useState('All');
   const [selectedMetric, setSelectedMetric] = useState('All');
 
-  /*
+  const [farms, setFarms] = useState(['testFarm']);
+  const [metrics, setMetrics] = useState(['testMetric']);
+
+
+  
   const getAll = async () => {
     const x = await BackendConnection.getAll();
     console.log(x);
   }
   const getDistinct = async () => {
-    const x = await BackendConnection.getDistinct();
-    console.log(x);
+    const y = await BackendConnection.getDistinct('farmname');
+    const x = await BackendConnection.getDistinct('metrictype');
+    console.log(y,x);
   }
+
+  //by farm
   const search = async () => {
-    const x = await BackendConnection.search('test');
+    const x = await BackendConnection.search("Noora''s farm");
     console.log('x:',x);
   }
-  */
+  
 
   function farmSelect(e){
     setSelectedFarm(e);
@@ -37,12 +44,12 @@ const App = () => {
     <div className="App">
       <div className="topBar">
         <DropdownList
-          data={['All','1','2','3']}
+          data={['All',...farms]}
           label={'Farm'}
           helper={'Select Farm'}
           parentFunction={farmSelect}/>
         <DropdownList
-          data={['All','1','2','3']}
+          data={['All',...metrics]}
           label={'Metric'}
           helper={'Select Metric'}
           parentFunction={metricSelect}/>
@@ -58,7 +65,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* 
+      
       <Button 
         variant="contained"
         onClick={()=>getAll()}>
@@ -74,7 +81,7 @@ const App = () => {
         onClick={()=>search()}>
           search
       </Button>
-      */}
+      
       
     </div>
   );

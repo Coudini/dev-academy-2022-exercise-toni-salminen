@@ -8,8 +8,8 @@ const getAll = async () => {
     return result.data;
 }
 
-const getDistinct = async () => {
-    const result = await axios.get(`${baseUrl}distinct`);
+const getDistinct = async (column) => {
+    const result = await axios.get(`${baseUrl}distinct?column=${column}`);
     return result.data;
 }
 

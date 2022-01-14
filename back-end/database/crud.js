@@ -38,6 +38,7 @@ const connectionFunctions = {
     getDistinct: (table, column) => {
         return new Promise((resolve, reject) => {
             if (connection) {
+                console.log(column)
                 let queryLine = `SELECT DISTINCT ${column} FROM ${mysql.escapeId(table)} ORDER BY ${column} ASC`;
                 connection.query(queryLine, (err,result) => {
                     err ? reject(err) : resolve(result);
