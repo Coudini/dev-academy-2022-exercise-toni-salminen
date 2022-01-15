@@ -3,6 +3,22 @@ import { AreaChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, A
 
 const DataChart = ({data,multipleMetrics,labels}) => {
 
+    const colorCodes = {yellow: '#ffc658', green: '#82ca9d', blue: '#8884d8'};
+    let colorCode = '';
+    if (!multipleMetrics) {
+        console.log('DataChart labels', labels)
+        switch (labels) {
+            case 'rainFall':
+                colorCode = colorCodes.blue;
+                break;
+            case 'pH':
+                colorCode = colorCodes.green;
+                break;
+            case 'temperature':
+                colorCode = colorCodes.yellow;
+        }
+    }
+
     return (
         multipleMetrics ? 
             <div>
@@ -14,9 +30,9 @@ const DataChart = ({data,multipleMetrics,labels}) => {
                         <XAxis/>
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="rainFall" stroke="#8884d8" />
-                        <Area type="monotone" dataKey="pH" stroke="#82ca9d" />
-                        <Area type="monotone" dataKey="temperature" stroke="#ffc658" />
+                        <Area type="monotone" dataKey="rainFall" stroke={colorCodes.blue} fill={colorCodes.blue} />
+                        <Area type="monotone" dataKey="pH" stroke={colorCodes.green} fill={colorCodes.green} />
+                        <Area type="monotone" dataKey="temperature" stroke={colorCodes.yellow} fill={colorCodes.yellow} />
                     </AreaChart>
 
             </div>
@@ -31,21 +47,11 @@ const DataChart = ({data,multipleMetrics,labels}) => {
                         <XAxis />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="metricvalue" stroke="#8884d8" />
+                        <Area type="monotone" dataKey="metricvalue" stroke={colorCode} fill={colorCode} />
                     </AreaChart>
                 
 
             </div>
-            /* 
-            <ResponsiveContainer width="100%" height="100%">
-            <AreaChart width={500} height={250} data={data}>
-            </AreaChart>
-            </ResponsiveContainer>
-
-
-            <ResponsiveContainer width="100%" height="100%">
-            </ResponsiveContainer>
-            */
     )
 }
 
