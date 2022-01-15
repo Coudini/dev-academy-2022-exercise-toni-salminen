@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const path = require('path');
 
 const database = require('./database/crud.js');
 
@@ -11,7 +12,13 @@ const port = process.env.PORT || 8000;
 
 const apiRouter = require('./routes/farmData.js');
 
-app.use(apiRouter);
+app.use(express.static(path.resolve(__dirname, './build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './build', 'index.html'));
+});
+
+//app.use(apiRouter);
 
 // initialize database with provided csv-files
 // NOTE: if csv-files contain loads of data, it may take some time to push everytthing into the sql-database
