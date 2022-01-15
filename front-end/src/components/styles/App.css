@@ -31,9 +31,7 @@ body {
     background-color: rgb(152, 152, 152);
 }
 
-.dataTable {
-    overflow-x: hidden;
-}
+
 
 .graph {
     width: 30%;

@@ -1,9 +1,28 @@
 import React, {useState,useEffect} from 'react';
 import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper} from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid'
 
 const DataTable = ({rows,columns}) => {
+    console.log("DataTable");
+    console.log("rows:",rows);
+    console.log("columns;",columns);
     return(
-        <div className="dataTable">
+        <div style={{ height: '85%', width: '100%'}}>
+        
+            <DataGrid
+                rows={rows}
+                columns={[
+                    {field: 'farmname', headerName: 'Name', width: 300},
+                    {field: 'datevalue', headerName: 'Date', width: 200},
+                    {field: 'metrictype', headerName: 'Metric', width: 200},
+                    {field: 'metricvalue', headerName: 'Value', width: 200}
+                ]}
+                pageSize={9}
+                rowsPerPageOptions={[9]}
+            />
+
+
+            {/*
             <TableContainer sx={{
     height: 600    
   }}>
@@ -35,6 +54,7 @@ const DataTable = ({rows,columns}) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+             */}
         </div>
     )
 }

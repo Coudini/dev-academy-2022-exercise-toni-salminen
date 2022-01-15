@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import BackendConnection from './BackendConnection';
 import DropdownList from './DropdownList';
 import DataTable from './DataTable';
+import DataChart from './DataChart';
 
 const App = () => {
 
@@ -13,7 +14,13 @@ const App = () => {
 
   const [farms, setFarms] = useState([]);
   const [metrics, setMetrics] = useState([]);
-  
+
+  // state; if single farm is selected: show chart
+  const [multipleMetrics, setMultipleMetrics] = useState (true);
+  //const [chartData, setChartData] = useState([]);
+  const [showChart, setShowChart] = useState(false);
+
+
   const getAll = async () => {
     const dbFarmData = await BackendConnection.getAll();
     console.log('getAll:', dbFarmData);
@@ -22,6 +29,8 @@ const App = () => {
       await farmDataArray.push(dbFarmData[i]);
     }
     setFarmData(farmDataArray);
+    setMultipleMetrics(true);
+    setShowChart(false);
   }
 
   const getDistinct = async () => {
@@ -48,10 +57,14 @@ const App = () => {
     for (let i = 0; i < dbFarmData.length; i++) {
       await farmDataArray.push(dbFarmData[i]);
     }
-    setFarmData(farmDataArray);
+    await setFarmData(farmDataArray);
+    //const dbChartData = await makeChartData(farmDataArray);
+    //setChartData(dbChartData);
+    setMultipleMetrics(true);
+    setShowChart(true);
   }
 
-  // by metric (crud.js search())
+  // by metric
   const getMetric = async (metric) => {
     const dbFarmData = await BackendConnection.searchMetric(metric);
     console.log('searchmetric:',metric, dbFarmData);
@@ -60,6 +73,8 @@ const App = () => {
       await farmDataArray.push(dbFarmData[i]);
     }
     setFarmData(farmDataArray);
+    setMultipleMetrics(false);
+    setShowChart(false);
   }
 
   // by farm and metric (make new to crud.js)
@@ -70,7 +85,11 @@ const App = () => {
     for (let i = 0; i < dbFarmData.length; i++) {
       await farmDataArray.push(dbFarmData[i]);
     }
-    setFarmData(farmDataArray);
+    await setFarmData(farmDataArray);
+    //const dbChartData = await makeChartData(farmDataArray);
+    //setChartData(dbChartData);
+    setMultipleMetrics(false);
+    setShowChart(true);
   }
   
 
@@ -113,7 +132,9 @@ const App = () => {
     }
   }
 
-
+  async function makeChartData (data) {
+    console.log("makeChartData",data);
+  }
 
 
 
@@ -149,7 +170,19 @@ const App = () => {
           />
         </div>
         <div className="graph">
-          graph
+          {showChart ?
+            multipleMetrics?
+              <DataChart
+              data={farmData}
+              multipleMetrics={multipleMetrics}
+              labels={metrics}
+              /> :
+              <DataChart
+                data={farmData}
+                multipleMetrics={multipleMetrics}
+                labels={selectedMetric}
+              /> :
+          <p>Select a farm to show chart</p>}
         </div>
       </div>
 
