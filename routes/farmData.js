@@ -4,8 +4,8 @@ router.use(express.json());
 
 const path = require('path');
 
-//const publicPath = path.join(__dirname, '../public/index.html', 'public');
-//router.use(express.static(publicPath));
+const publicPath = path.join(__dirname, '../build/index.html', 'public');
+router.use(express.static(publicPath));
 router.use(express.static('build'));
 
 const connection = require('../database/crud');
