@@ -25,7 +25,7 @@ const DataChart = ({data,multipleMetrics,labels}) => {
                 <p>title:{data[0].farmname}</p>
                 <p>labels:{labels[0]}{labels[1]}{labels[2]}</p>
 
-                    <AreaChart width={500} height={250} data={data}>
+                    <AreaChart width={500} height={500} data={data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis/>
                         <YAxis />
@@ -42,7 +42,7 @@ const DataChart = ({data,multipleMetrics,labels}) => {
                 <p>labels:{labels}</p>
 
                 
-                    <AreaChart width={500} height={250} data={data}>
+                    <AreaChart width={500} height={500} data={data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis />
                         <YAxis />
