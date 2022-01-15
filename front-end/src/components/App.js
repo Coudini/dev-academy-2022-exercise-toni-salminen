@@ -1,5 +1,4 @@
 import './styles/App.css';
-import Button from '@mui/material/Button';
 import React, {useState, useEffect} from 'react';
 import BackendConnection from './BackendConnection';
 import DropdownList from './DropdownList';
@@ -209,25 +208,6 @@ const App = () => {
           <p>Select a farm to show chart</p>}
         </div>
       </div>
-
-{/*      
-      <Button 
-        variant="contained"
-        onClick={()=>getAll()}>
-          getAll
-      </Button>
-      <Button 
-        variant="contained"
-        onClick={()=>getDistinct()}>
-          getDistinct
-      </Button>
-      <Button 
-        variant="contained"
-        onClick={()=>search()}>
-          search
-      </Button>
-*/}  
-      
     </div>
   );
 }

@@ -21,37 +21,27 @@ const DataChart = ({data,multipleMetrics,labels}) => {
 
     return (
         multipleMetrics ? 
-            <div>
-                <p>title:{data[0].farmname}</p>
-                <p>labels:{labels[0]}{labels[1]}{labels[2]}</p>
-
-                    <AreaChart width={500} height={500} data={data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis/>
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="rainFall" stroke={colorCodes.blue} fill={colorCodes.blue} />
-                        <Area type="monotone" dataKey="pH" stroke={colorCodes.green} fill={colorCodes.green} />
-                        <Area type="monotone" dataKey="temperature" stroke={colorCodes.yellow} fill={colorCodes.yellow} />
-                    </AreaChart>
-
-            </div>
+            <ResponsiveContainer height={400}>
+                <AreaChart width={400} height={400} data={data}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis/>
+                    <YAxis />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="rainFall" stroke={colorCodes.blue} fill={colorCodes.blue} />
+                    <Area type="monotone" dataKey="pH" stroke={colorCodes.green} fill={colorCodes.green} />
+                    <Area type="monotone" dataKey="temperature" stroke={colorCodes.yellow} fill={colorCodes.yellow} />
+                </AreaChart>
+            </ResponsiveContainer>
         :
-            <div>
-                <p>title:{data[0].farmname}</p>
-                <p>labels:{labels}</p>
-
-                
-                    <AreaChart width={500} height={500} data={data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="metricvalue" stroke={colorCode} fill={colorCode} />
-                    </AreaChart>
-                
-
-            </div>
+            <ResponsiveContainer height={400}>
+                <AreaChart width={400} height={400} data={data}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis />
+                    <YAxis />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="metricvalue" stroke={colorCode} fill={colorCode} />
+                </AreaChart>
+            </ResponsiveContainer>  
     )
 }
 
