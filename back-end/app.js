@@ -11,6 +11,8 @@ const port = process.env.PORT || 8000;
 
 const apiRouter = require('./routes/farmData.js');
 
+app.use(apiRouter);
+
 // initialize database with provided csv-files
 // NOTE: if csv-files contain loads of data, it may take some time to push everytthing into the sql-database
 async function initDbCsv(){
@@ -35,6 +37,7 @@ async function initDbCsv(){
 // Opens and maintains a connection
 const getConnection = app.listen(port, async () => {
     try {
+        
         await database.connect();
         console.log('Connected');
 

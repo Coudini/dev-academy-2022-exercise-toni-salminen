@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
-router.use(express.json())
+router.use(express.json());
+
+const path = require('path');
+
+//const publicPath = path.join(__dirname, '../public/index.html', 'public');
+//router.use(express.static(publicPath));
+router.use(express.static('build'));
 
 const connection = require('../database/crud');
+
+router.get('*', function (req,res) {
+    res.sendFile(path.resolve('../build/index.html'));
+})
 
 // Different routings for data requests
 
