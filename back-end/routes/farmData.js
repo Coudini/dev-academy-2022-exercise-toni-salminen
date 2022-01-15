@@ -4,6 +4,8 @@ router.use(express.json())
 
 const connection = require('../database/crud');
 
+// Different routings for data requests
+
 //get all
 router.get('/farmdata', async (req, res) => {
     try {
@@ -32,19 +34,14 @@ router.get('/searchfarm', async (req, res) => {
 
 // get by metrictype
 router.get('/searchmetric', async (req, res) => {
-    console.log(req);
     const results = await connection.searchMetric('farmdata','metrictype',req.query.metrictype)
     res.status(200).send(results);
 })
 
 // get by metrictype and farmname
 router.get('/searchfarmmetric', async (req, res) => {
-    console.log(req);
     const results = await connection.searchFarmMetric('farmdata','farmname','metrictype',req.query.metrictype,req.query.farmname)
     res.status(200).send(results);
 })
-
-// clear and init with csv-files
-router.get('/init')
 
 module.exports = router;

@@ -4,22 +4,28 @@ const config = require("./config.js");
 
 let connection = null;
 
+// Promise based connection functions for sql-requests
 const connectionFunctions = {
+
+    // Open Connection to sql-database
     connect: () => {
         return new Promise((resolve, reject) => {
-            console.log(config)
             connection = mysql.createConnection(config);
             connection
                 ? resolve("Connected!")
                 : reject(new Error("Connection failed."));
         });
     },
+
+    // Close connection from sql-database
     close: () => {
         return new Promise((resolve) => {
             connection.end();
             resolve("Connection closed.");
         });
     },
+
+    // Get everything from sql-database, ordered by name and date
     getAll: (table) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -34,7 +40,7 @@ const connectionFunctions = {
         });
     },
 
-    // Used for listing all farm names
+    // Get distinct names from sql-database
     getDistinct: (table, column) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -49,13 +55,11 @@ const connectionFunctions = {
         })
     },
 
-    // Used for listing by farm name ordered by dates
+    // Get data with provided argument matching farm names from sql-database
     searchFarm: (table,column, argument) => {
         return new Promise((resolve, reject) => {
-            console.log(table,column,argument)
             if (connection) {
                 let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}' ORDER BY datevalue ASC`;
-                console.log("queryLine:",queryLine);
                 connection.query(queryLine, (err, result) => {
                     err ? reject(err) : resolve(result);
                 })
@@ -66,12 +70,11 @@ const connectionFunctions = {
         });
     },
 
+    // Get data with provided argument matching type of metric from sql-database
     searchMetric: (table,column, argument) => {
         return new Promise((resolve, reject) => {
-            console.log(table,column,argument)
             if (connection) {
                 let queryLine = `SELECT * FROM ${mysql.escapeId(table)} WHERE ${column} = '${argument}' ORDER BY datevalue ASC`;
-                console.log("queryLine:",queryLine);
                 connection.query(queryLine, (err, result) => {
                     err ? reject(err) : resolve(result);
                 })
@@ -82,6 +85,7 @@ const connectionFunctions = {
         });
     },
     
+    // Get data with provided arguments matching type of metric and farm name from sql-database
     searchFarmMetric: (table,farmColumn,metricColumn,metricArgument,farmArgument) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -94,7 +98,7 @@ const connectionFunctions = {
         });
     },
 
-
+    // Save data into sql-database
     saveData: (table, data) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -111,6 +115,7 @@ const connectionFunctions = {
         })
     },
 
+    // Empty sql-database
     deleteAll: (table) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -123,6 +128,7 @@ const connectionFunctions = {
         })
     },
 
+    // Delete a row from sql-database matching the provided 'id'-argument
     deleteById: (table, id) => {
         return new Promise((resolve, reject) => {
             if (connection) {
@@ -134,6 +140,8 @@ const connectionFunctions = {
             else {reject(new Error("Connection failed."))}
         })
     },
+
+    // Insert a row into sql-database
     insert: (table, columns, data) => {
         return new Promise((resolve, reject) => {
             if (connection) {

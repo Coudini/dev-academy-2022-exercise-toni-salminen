@@ -1,6 +1,13 @@
 const Validator = require("jsonschema").Validator;
 const validator = new Validator();
 
+/*
+Json schema for validating data according to following ruleset:
+Accept only temperature,rainfall and PH data. Other metrics should be discarded
+pH is a decimal value between 0 - 14
+Temperature is a celsius value between -50 and 100
+Rainfall is a positive number between 0 and 500
+*/
 const dataSchema = {
     "type": "object",
     "properties": {
@@ -30,6 +37,7 @@ const dataSchema = {
     }
 }
 
+// Exported function which returns a validation result based on Json Schema
 const validation = {
     dataValidation: (data) => {
         return validator.validate(data, dataSchema);
@@ -37,14 +45,3 @@ const validation = {
 }
 
 module.exports = validation;
-
-/*
- 
-Accept only temperature,rainfall and PH data. Other metrics should be discarded
-Discard invalid values with next rules
-pH is a decimal value between 0 - 14
-Temperature is a celsius value between -50 and 100
-Rainfall is a positive number between 0 and 500
-Data may be missing from certain dates
-
-*/

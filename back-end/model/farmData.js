@@ -1,3 +1,4 @@
+// Datastructure for farm data
 class FarmData {
     constructor(data) {
         this.name = data.name;
