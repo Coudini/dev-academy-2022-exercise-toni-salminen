@@ -1,4 +1,13 @@
 {
+  "name": "dev-academy-2022-exercise-toni-salminen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+
+  "engines": {
+    "node": "17.0.1"
+  },
+
   "dependencies": {
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
