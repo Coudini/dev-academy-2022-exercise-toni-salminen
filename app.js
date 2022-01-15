@@ -1,18 +1,20 @@
-'use strict';
+//'use strict';
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const path = require('path');
+//const path = require('path');
 
+const server = require('./server.js');
 const database = require('./database/crud.js');
 
 app.use(cors());
+app.use(server);
 
 const port = process.env.PORT || 8000;
 
-const apiRouter = require('./server.js');
 
-app.use(apiRouter);
+
+
 
 // initialize database with provided csv-files
 // NOTE: if csv-files contain loads of data, it may take some time to push everytthing into the sql-database
@@ -43,11 +45,6 @@ const getConnection = app.listen(port, async () => {
         console.log('Connected');
 
         console.log(`Listening to port ${getConnection.address().port}`);
-        
-        //app.use('/api', apiRouter);
-
-        const x = await database.getAll('farmdata');
-        console.log(x);
 
         // Function for database-initiation with the provided csv-files
         //initDbCsv();
@@ -58,4 +55,4 @@ const getConnection = app.listen(port, async () => {
     }
 })
 
-module.exports = app;
+//module.exports = app;
