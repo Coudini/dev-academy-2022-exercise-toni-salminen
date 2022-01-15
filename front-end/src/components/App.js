@@ -19,6 +19,7 @@ const App = () => {
   const [multipleMetrics, setMultipleMetrics] = useState (true);
   //const [chartData, setChartData] = useState([]);
   const [showChart, setShowChart] = useState(false);
+  const [multipleMetricsData, setMultipleMetricsData] = useState([]);
 
 
   const getAll = async () => {
@@ -60,6 +61,8 @@ const App = () => {
     await setFarmData(farmDataArray);
     //const dbChartData = await makeChartData(farmDataArray);
     //setChartData(dbChartData);
+    const dbMultipleChartData = await makeMultipleChartData(dbFarmData);
+    await setMultipleMetricsData(dbMultipleChartData);
     setMultipleMetrics(true);
     setShowChart(true);
   }
@@ -132,8 +135,29 @@ const App = () => {
     }
   }
 
-  async function makeChartData (data) {
-    console.log("makeChartData",data);
+  async function makeMultipleChartData (data) {
+    let chartArray = [];
+    for (let i = 0; i < data.length; i++) {
+      console.log(data[i]);
+      switch (data[i].metrictype) {
+        case 'pH':
+          await chartArray.push(
+            {pH: data[i].metricvalue}
+          );
+          break;
+        case 'rainFall':
+          await chartArray.push(
+            {rainFall: data[i].metricvalue}
+          );
+          break;
+        case 'temperature':
+          await chartArray.push(
+            {temperature: data[i].metricvalue}
+          );
+      }
+    }
+    console.log('array',chartArray);
+    return chartArray;
   }
 
 
@@ -173,7 +197,7 @@ const App = () => {
           {showChart ?
             multipleMetrics?
               <DataChart
-              data={farmData}
+              data={multipleMetricsData}
               multipleMetrics={multipleMetrics}
               labels={metrics}
               /> :
