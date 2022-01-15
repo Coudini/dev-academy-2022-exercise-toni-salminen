@@ -9,6 +9,7 @@ const connectionFunctions = {
 
     // Open Connection to sql-database
     connect: () => {
+        console.log(config);
         return new Promise((resolve, reject) => {
             connection = mysql.createConnection(config);
             connection

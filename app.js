@@ -11,10 +11,8 @@ app.use(cors());
 const port = process.env.PORT || 8000;
 
 const apiRouter = require('./server.js');
+
 app.use(apiRouter);
-
-
-//app.use(apiRouter);
 
 // initialize database with provided csv-files
 // NOTE: if csv-files contain loads of data, it may take some time to push everytthing into the sql-database
@@ -47,6 +45,9 @@ const getConnection = app.listen(port, async () => {
         console.log(`Listening to port ${getConnection.address().port}`);
         
         //app.use('/api', apiRouter);
+
+        const x = await database.getAll('farmdata');
+        console.log(x);
 
         // Function for database-initiation with the provided csv-files
         //initDbCsv();

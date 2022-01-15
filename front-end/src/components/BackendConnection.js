@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const baseUrl = 'http://localhost:8000/api/';
-const baseUrl = 'https://dev-academy-2022-tonisalminen.herokuapp.com/api/';
+//const baseUrl = 'http://localhost:8000/';
+const baseUrl = 'https://dev-academy-2022-tonisalminen.herokuapp.com/';
 
 // Axios get-function for fetching all data from the sql-database
 const getAll = async () => {
