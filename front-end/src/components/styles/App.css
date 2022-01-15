@@ -1,18 +1,16 @@
 body {
-    background-color: rgb(152, 152, 152);
+    background-color: rgb(138, 138, 138);
 }
 
 .container {
     top: 15%;
     width: 100%;
     height: 100%;
-    background-color: rgb(152, 152, 152);
     position: fixed;
 }
 
 .topBar {
     overflow: hidden;
-    background-color: rgb(152, 152, 152);
     position: fixed;
     top: 0;
     width: 100%;
@@ -28,7 +26,6 @@ body {
     width: 70%;
     height: 100%;
     float: left;
-    background-color: rgb(152, 152, 152);
 }
 
 
@@ -37,5 +34,4 @@ body {
     width: 30%;
     height: 100%;
     float: right;
-    background-color: rgb(152, 152, 152);
 }
