@@ -46,7 +46,7 @@ const getConnection = app.listen(port, async () => {
 
         console.log(`Listening to port ${getConnection.address().port}`);
         
-        app.use('/api', apiRouter);
+        //app.use('/api', apiRouter);
 
         // Function for database-initiation with the provided csv-files
         //initDbCsv();
