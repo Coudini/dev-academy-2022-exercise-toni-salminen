@@ -11,7 +11,7 @@ app.use(cors());
 const port = process.env.PORT || 8000;
 
 const apiRouter = require('./server.js');
-
+app.use(apiRouter);
 
 
 //app.use(apiRouter);
