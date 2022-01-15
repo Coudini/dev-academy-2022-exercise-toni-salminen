@@ -1,5 +1,5 @@
 # dev-academy-2022-exercise-toni-salminen
-My exercise for solita dev-academy-2022 assigment
+My submission for solita dev-academy-2022 assigment
 
 ## Link to running app
 https://dev-academy-2022-tonisalminen.herokuapp.com/
@@ -9,7 +9,7 @@ https://dev-academy-2022-tonisalminen.herokuapp.com/
 - Endpoints to fetch data from farms with different granularities (by month, by metric) [a link](https://github.com/Coudini/dev-academy-2022-exercise-toni-salminen/blob/main/server.js)
 - Show data in table format [a link](https://github.com/Coudini/dev-academy-2022-exercise-toni-salminen/blob/main/front-end/src/components/DataTable.js)
 - Add filtering options (found on table itself and when selecting dropdown items data is fetched on selected parameters(filtering)) [a link](https://github.com/Coudini/dev-academy-2022-exercise-toni-salminen/blob/main/front-end/src/components/DropdownList.js)
-- Show data in graphs [a link](https://github.com/Coudini/dev-academy-2022-exercise-toni-salminen/blob/main/front-end/src/components/DataChart.js)
+- Show data in graphs [a link](https://github.com/Coudini/dev-academy-2022-exercise-toni-salminen/blob/main/front-end/src/components/DataChart.js) (if no specific farm is selected no graph is shown. if no metric is selected shows all metrics of the chosen farm in graph, if selected shows the selected metric of the chosen farm)
 - Running backend in Cloud (the whole app runs online) [a link](https://dev-academy-2022-tonisalminen.herokuapp.com/) api calls are enabled too, for example: [a link](https://dev-academy-2022-tonisalminen.herokuapp.com/api/searchfarmmetric?farmname=PartialTech%20Research%20Farm&metrictype=rainFall)
 
 ## Screenshots
