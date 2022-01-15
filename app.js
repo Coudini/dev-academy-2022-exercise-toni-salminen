@@ -2,13 +2,14 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-//const path = require('path');
 
-const server = require('./server.js');
+const api = require('./server.js');
 const database = require('./database/crud.js');
 
 app.use(cors());
-app.use(server);
+app.use('/api', api);
+
+app.use(express.static('build'));
 
 const port = process.env.PORT || 8000;
 
@@ -55,4 +56,4 @@ const getConnection = app.listen(port, async () => {
     }
 })
 
-//module.exports = app;
+module.exports = app;
